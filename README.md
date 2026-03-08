@@ -38,12 +38,14 @@ Their dynamics follow a **Lotka–Volterra competition model**.
 Sensitive population:
 
 $$
-\frac{dT_s}{dt} =
+\frac{dT_s}{dt}
+=
 \alpha_s T_s
 \left(
 1 - \frac{T_s + c_{sr} T_r}{K}
 \right)
-- \beta u T_s
+-
+\beta u T_s
 $$
 
 Resistant population:
