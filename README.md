@@ -37,11 +37,24 @@ Their dynamics follow a **Lotka–Volterra competition model**.
 
 Sensitive population:
 
-dTs/dt = αs Ts (1 - (Ts + c_sr Tr)/K) - β _ u _ Ts
+$$
+\frac{dT_s}{dt} =
+\alpha_s T_s
+\left(
+1 - \frac{T_s + c_{sr} T_r}{K}
+\right)
+- \beta u T_s
+$$
 
 Resistant population:
 
-dTr/dt = αr Tr (1 - (Tr + c_rs Ts)/K)
+$$
+\frac{dT_r}{dt} =
+\alpha_r T_r
+\left(
+1 - \frac{T_r + c_{rs} T_s}{K}
+\right)
+$$
 
 Where
 
@@ -93,13 +106,17 @@ T\* = 0.5K
 
 Reward:
 
-R = -((T - T*)/K)^2 - λg * max(dT,0) - λd \* dose
+$$
+R = -\left(\frac{T - T^*}{K}\right)^2 - 0.5 \max(dT,0) - \lambda_d \cdot dose
+$$
 
 Where
 
-T = tumor size  
-dT = tumor growth rate  
-dose = applied therapy
+- **T** — tumor size
+- **T\*** — target tumor level (0.5K)
+- **dT** — tumor growth rate
+- **dose** — applied therapy
+- **λ_d** — treatment penalty
 
 This balances:
 
