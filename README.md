@@ -22,7 +22,11 @@ tumor shrinks → stop therapy
 
 Instead of attempting to eradicate the tumor completely, the goal is to **maintain a stable tumor burden** and prevent resistant populations from dominating.
 
-This project investigates whether **reinforcement learning agents can discover adaptive treatment strategies automatically**.
+This project investigates whether reinforcement learning agents can discover adaptive treatment strategies directly from tumor observations.
+
+A common heuristic used in adaptive therapy is the **threshold strategy**, where treatment is applied when the tumor exceeds a certain level and stopped when it decreases.
+
+Here we investigate whether a reinforcement learning agent can **learn such adaptive treatment policies automatically**, using only observable tumor burden and growth rate, without direct knowledge of the internal tumor composition.
 
 ---
 
@@ -42,6 +46,9 @@ Sensitive population:
 Resistant population:
 
 ![equation](<https://latex.codecogs.com/svg.image?\frac{dT_r}{dt}=\alpha_rT_r\left(1-\frac{T_r+c_{rs}T_s}{K}\right)>)
+
+The differential equations are discretized using Euler integration with step Δt = 1.0
+
 Where
 
 | Parameter  | Meaning                  |
@@ -50,8 +57,6 @@ Where
 | αs, αr     | growth rates             |
 | c_sr, c_rs | competition coefficients |
 | u          | treatment dose           |
-
-The differential equations are discretized using Euler integration with step Δt = 1.
 
 Treatment affects **only sensitive cells**, while resistant cells remain unaffected.
 
