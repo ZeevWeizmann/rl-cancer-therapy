@@ -328,8 +328,8 @@ Run the full pipeline:
 
 The modeling framework used in this project is inspired by established work in mathematical oncology, pharmacometrics, and evolutionary cancer modeling.
 
-- Volterra, V. (1926). _Fluctuations in the abundance of a species considered mathematically_. Nature.  
-  https://doi.org/10.1038/118558a0
+- Bomze, I. M. (1995). _Lotka-Volterra equation and replicator dynamics: new issues in classification_. Biological Cybernetics.  
+  https://doi.org/10.1007/bf00201420
 
 - Ollier, E. et al. (2016). _Analysis of temozolomide resistance in low-grade gliomas using a mechanistic model_. Fundamental & Clinical Pharmacology.  
   https://doi.org/10.1111/fcp.12174
