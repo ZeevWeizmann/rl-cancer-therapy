@@ -20,14 +20,18 @@ random.seed(seed)
 
 MODEL_DIR = os.path.join("results", "models")
 PLOT_DIR = os.path.join("results", "plots")
+LOG_DIR = os.path.join("results", "logs", "ppo")
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(PLOT_DIR, exist_ok=True)
+os.makedirs(LOG_DIR, exist_ok=True)
 
 
 env = TumorEnv()
 env.reset(seed=seed)
-env = Monitor(env)
+
+# IMPORTANT: log file for learning curve
+env = Monitor(env, filename=os.path.join(LOG_DIR, "monitor.csv"))
 
 
 model = PPO(
@@ -39,14 +43,13 @@ model = PPO(
     gamma=0.99,
     gae_lambda=0.95,
     clip_range=0.2,
-    ent_coef=0.01,      
+    ent_coef=0.01,
     verbose=1,
     seed=seed
 )
 
 
 model.learn(total_timesteps=200000)
-
 
 model.save(os.path.join(MODEL_DIR, "tumor_ppo"))
 

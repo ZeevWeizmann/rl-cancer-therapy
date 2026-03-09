@@ -7,6 +7,7 @@ import random
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from stable_baselines3 import DQN
+from stable_baselines3.common.monitor import Monitor
 from env.tumor_env import TumorEnv
 
 
@@ -19,12 +20,18 @@ random.seed(seed)
 
 MODEL_DIR = os.path.join("results", "models")
 PLOT_DIR = os.path.join("results", "plots")
+LOG_DIR = os.path.join("results", "logs", "dqn")
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(PLOT_DIR, exist_ok=True)
+os.makedirs(LOG_DIR, exist_ok=True)
 
 
 env = TumorEnv()
+env.reset(seed=seed)
+
+# Monitor logs training statistics
+env = Monitor(env, LOG_DIR)
 
 
 model = DQN(
@@ -45,6 +52,5 @@ model = DQN(
 
 
 model.learn(total_timesteps=200000)
-
 
 model.save(os.path.join(MODEL_DIR, "tumor_dqn"))

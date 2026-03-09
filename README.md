@@ -41,14 +41,7 @@ Sensitive population:
 
 Resistant population:
 
-$$
-\frac{dT_r}{dt} =
-\alpha_r T_r
-\left(
-1 - \frac{T_r + c_{rs} T_s}{K}
-\right)
-$$
-
+![equation](<https://latex.codecogs.com/svg.image?\frac{dT_r}{dt}=\alpha_rT_r\left(1-\frac{T_r+c_{rs}T_s}{K}\right)>)
 Where
 
 | Parameter  | Meaning                  |
@@ -99,9 +92,7 @@ T\* = 0.5K
 
 Reward:
 
-$$
-R = -\left(\frac{T - T^*}{K}\right)^2 - 0.5 \max(dT,0) - \lambda_d \cdot dose
-$$
+![equation](<https://latex.codecogs.com/svg.image?R=-\left(\frac{T-T^*}{K}\right)^2-0.5\max(dT,0)-\lambda_d\cdot dose>)
 
 Where
 
@@ -187,6 +178,21 @@ Typical behaviors:
 | MAX       | resistant cells dominate         |
 | THRESHOLD | stable tumor plateau             |
 | RL        | adaptive treatment cycles        |
+
+---
+
+## Learning Curves
+
+![Learning curves](results/plots/learning_curves.png)
+
+The learning curves compare the training dynamics of **DQN** and **PPO**.
+
+Both algorithms improve the treatment policy over time, but they exhibit different learning behaviors:
+
+- **DQN learns faster initially**, rapidly improving the reward during early training.
+- **PPO converges more smoothly and achieves slightly better final performance.**
+
+These results suggest that **policy gradient methods provide more stable learning dynamics** in this tumor control environment.
 
 ---
 

@@ -15,7 +15,8 @@ from utils.plotting import (
     plot_resistant,
     plot_dose,
     plot_phase,
-    plot_scores
+    plot_scores,
+    plot_learning_curves
 )
 
 from utils.metrics import compute_global_scores
@@ -45,25 +46,6 @@ results["DQN"] = simulate("rl", dqn)
 results["PPO"] = simulate("rl", ppo)
 
 
-# # ------------------------------------------------
-# # compute global score
-# # ------------------------------------------------
-
-# print("\n===== GLOBAL SCORE =====\n")
-
-# for name, (Ts, Tr, dose) in results.items():
-
-#     tumor = Ts + Tr
-
-#     tumor_norm = np.mean(tumor) / 1e7
-#     dose_penalty = np.mean(dose)
-
-#     score = tumor_norm + LAMBDA * dose_penalty
-
-#     print(name)
-#     print("score:", score)
-#     print()
-
 #Plotting results
 PLOT_DIR = os.path.join("results", "plots")
 os.makedirs(PLOT_DIR, exist_ok=True)
@@ -76,4 +58,12 @@ plot_dose(results, PLOT_DIR)
 plot_phase(results, PLOT_DIR)
 scores = compute_global_scores(results, LAMBDA)
 plot_scores(scores, PLOT_DIR)
+plot_learning_curves(
+    {
+        "DQN": "results/logs/dqn/monitor.csv",
+        "PPO": "results/logs/ppo/monitor.csv"
+    },
+    PLOT_DIR
+)
+
 

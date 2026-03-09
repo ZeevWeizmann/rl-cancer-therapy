@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def plot_total_tumor(results, plot_dir):
@@ -110,6 +111,33 @@ def plot_scores(scores, plot_dir):
     plt.ylabel("Score")
 
     plt.savefig(os.path.join(plot_dir, "global_score.png"))
+
+    plt.show()
+    plt.close()
+
+def plot_learning_curves(log_files, plot_dir):
+
+    plt.figure(figsize=(10,6))
+
+    for name, log_file in log_files.items():
+
+        df = pd.read_csv(log_file, skiprows=1)
+
+        rewards = df["r"]
+        lengths = df["l"]
+        timesteps = lengths.cumsum()
+
+        rolling = rewards.rolling(50).mean()
+
+        plt.plot(timesteps, rolling, linewidth=2, label=name)
+
+    plt.title("Learning curves")
+    plt.xlabel("Training timesteps")
+    plt.ylabel("Episode reward")
+
+    plt.legend()
+
+    plt.savefig(os.path.join(plot_dir, "learning_curves.png"))
 
     plt.show()
     plt.close()
