@@ -4,7 +4,7 @@ This project implements a reinforcement learning framework for **adaptive cancer
 
 The goal is to learn treatment strategies that control tumor growth while minimizing drug usage, inspired by evolutionary oncology and adaptive therapy principles.
 
-🔗 **Repository**
+**Repository**
 https://github.com/ZeevWeizmann/rl-cancer-therapy
 
 ---
@@ -275,7 +275,7 @@ Maximum therapy leads to resistant takeover, while adaptive strategies maintain 
 
 ![Treatment schedule](results/plots/treatment_schedule.png)
 
-The RL agent learns **dynamic therapy cycles** instead of fixed treatment schedules.
+The RL agent learns adaptive on–off treatment cycles, similar to the best heuristic threshold therapy strategy.
 
 ---
 
@@ -321,3 +321,24 @@ python training/train_ppo.py
 Run the full pipeline:
 
 ./run.sh
+
+---
+
+# References
+
+The modeling framework used in this project is inspired by established work in mathematical oncology, pharmacometrics, and evolutionary cancer modeling.
+
+- Volterra, V. (1926). _Fluctuations in the abundance of a species considered mathematically_. Nature.  
+  https://doi.org/10.1038/118558a0
+
+- Ollier, E. et al. (2016). _Analysis of temozolomide resistance in low-grade gliomas using a mechanistic model_. Fundamental & Clinical Pharmacology.  
+  https://doi.org/10.1111/fcp.12174
+
+- Ribba, B. et al. (2014). _A Review of Mixed-Effects Models of Tumor Growth and Effects of Anticancer Drug Treatment Used in Population Analysis_. CPT: Pharmacometrics & Systems Pharmacology.  
+  https://doi.org/10.1038/psp.2014.3
+
+- Benzekry, S. et al. (2014). _A Review of Mathematical Models for Tumor Dynamics and Treatment Resistance_. Acta Biotheoretica.  
+  https://doi.org/10.1007/s10441-014-9219-9
+
+- Gatenby, R. A. et al. (2009). _Adaptive therapy_. Cancer Research.  
+  https://doi.org/10.1158/0008-5472.CAN-08-3658
