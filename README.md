@@ -51,6 +51,8 @@ Where
 | c_sr, c_rs | competition coefficients |
 | u          | treatment dose           |
 
+The differential equations are discretized using Euler integration with step Δt = 1.
+
 Treatment affects **only sensitive cells**, while resistant cells remain unaffected.
 
 ---
@@ -180,6 +182,50 @@ Typical behaviors:
 | RL        | adaptive treatment cycles        |
 
 ---
+
+## Phase-space dynamics of tumor populations
+
+![Phase space trajectories](results/plots/phase_plot.png)
+
+The figure shows the **phase-space trajectories** of tumor evolution under different treatment strategies.
+
+The axes represent the populations of two competing cell types:
+
+- **Sensitive cells (Ts)** – cells affected by therapy
+- **Resistant cells (Tr)** – cells not affected by therapy
+
+Each curve represents the trajectory of the system in the state space (Ts, Tr).
+
+### Resistant population dynamics
+
+The growth of resistant cells follows the competition equation:
+
+<p align="center">
+<img src="https://latex.codecogs.com/svg.image?\frac{dT_r}{dt}=\alpha_rT_r\left(1-\frac{T_r&plus;c_{rs}T_s}{K}\right)">
+</p>
+
+This equation shows that resistant growth depends on the **competition term**:
+
+<p align="center">
+<img src="https://latex.codecogs.com/svg.image?T_r&plus;c_{rs}T_s\geq K">
+</p>
+
+Resistant growth becomes limited or negative when the competition term approaches the carrying capacity.
+
+### Key observation
+
+Without treatment (blue trajectory), the system naturally converges to an ecological equilibrium where both populations coexist, resulting in a non-zero resistant population.
+
+The PPO policy instead keeps the system near the boundary where the resistant population remains close to zero.
+
+Importantly, the learned strategy does **not attempt to eliminate resistant cells directly**.  
+Rather, it maintains a sufficient population of sensitive cells that suppress resistant growth through ecological competition.
+
+### Interpretation
+
+This behaviour reflects the principle of **adaptive therapy**, where treatment aims to control tumor composition rather than eradicate all tumor cells.
+
+By maintaining sensitive cells in the system, the policy prevents the resistant population from expanding to its natural equilibrium level.
 
 ## Learning Curves
 

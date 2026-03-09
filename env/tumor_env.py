@@ -22,7 +22,6 @@ class TumorEnv(gym.Env):
         self.c_sr = C_SR
         self.c_rs = C_RS
 
-        # simulation
         self.dt = DT
 
         # treatment doses
@@ -89,21 +88,14 @@ class TumorEnv(gym.Env):
 
         self.t += 1
 
-        # relative growth rate 
-
         dT = (tumor_after - tumor_before) / max(tumor_before, 1)
 
-        # # reward
-
-        # reward = - (tumor_after / self.scale)**2
-        # reward -= 0.8 * max(dT, 0)
-        # reward -= DOSE_PENALTY * dose
 
         TARGET = 0.5 * self.K
 
 
         reward = -((tumor_after - TARGET)/self.K)**2
-        reward -= 0.5 * max(dT, 0)      # штраф если опухоль растёт
+        reward -= 0.5 * max(dT, 0)     
         reward -= DOSE_PENALTY * dose
 
         # termination
